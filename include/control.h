@@ -1,0 +1,27 @@
+#pragma once
+#include "main.h"
+#include <queue>
+
+class Control{
+    private:
+        static void driveCodeTank();
+        static void driveCodeArcade();
+        static void intake();
+        static void park();
+        static void wallStake();
+
+        
+        static double hang_speed;
+        static bool parking;
+        static bool load;
+
+        static int cDelay;
+        static std::queue<int> cRight;
+        static int countdown;
+
+    public:
+        static bool grabberState;
+        static void update();
+        static void initialize();
+        static void intakeVelocity(int v);
+};
