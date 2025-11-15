@@ -175,10 +175,11 @@ void Autonomous::matchLeftAuton2(){
     intakeMotor.move_voltage(10000); 
     rampMotor.move_voltage(12000);
 
-    pros::delay(2000);
-    midMotor.move_voltage(0);
-    intakeMotor.move_voltage(0);
+    pros::delay(1500);
+    midMotor.move_voltage(-5000);
+    intakeMotor.move_voltage(-5000);
     rampMotor.move_voltage(0);
+    pros::delay(500);
 
     pneumatic.set_value(true);
 
