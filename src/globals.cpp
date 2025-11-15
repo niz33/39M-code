@@ -28,13 +28,13 @@ pros::ADIDigitalOut parkl('A', false);
 pros::ADIDigitalOut parkr('B', false);
 
 pros::ADIDigitalOut pneumatic('C', false);
-
+ 
 //inertial Sensor
 pros::Imu inertial(16);
 
 //odometry
 pros::Rotation horizontalRotation(15);
-pros::Rotation verticalRotation(14);
+pros::Rotation verticalRotation(-14);
 
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalRotation, lemlib::Omniwheel::NEW_275, 2.65);
 
@@ -68,7 +68,7 @@ lemlib::Drivetrain drivetrain(&leftWheels,
 
 lemlib::OdomSensors sensors(&vertical_tracking_wheel,
                             nullptr,
-                            &horizontal_tracking_wheel,
+                            nullptr,
                             nullptr,
                             &inertial // inertial sensor
 );
@@ -76,13 +76,13 @@ lemlib::OdomSensors sensors(&vertical_tracking_wheel,
 lemlib::ControllerSettings lateral_controller(
   10, //kP
   0.0, //kI
-  4.0, //kD
+  0.0, //kD
   3.0, // anti windup
   1, // small error range in inches
   100, // small error range timeout, in miliseconds
   3, // large error range in inches
   500, // large error range timeout, in miliseconds
-  20 // max acceleration (slew)
+  50 // max acceleration (slew)
 );
 lemlib::ControllerSettings angular_controller(
   2, // proportional gain (kP)
@@ -104,3 +104,5 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
                         &throttle_curve, 
                         &steer_curve
 );
+
+pros::Task colorSortTask(Autonomous::print);

@@ -50,3 +50,5 @@ extern lemlib::OdomSensors sensors;
 extern lemlib::ControllerSettings lateral_controller;
 extern lemlib::ControllerSettings angular_controller;
 extern lemlib::Chassis chassis;
+
+extern pros::Task colorSortTask;

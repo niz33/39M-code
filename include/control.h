@@ -11,15 +11,17 @@ class Control{
         static void wallStake();
 
         
-        static double hang_speed;
-        static bool parking;
-        static bool load;
+        
 
         static int cDelay;
         static std::queue<int> cRight;
         static int countdown;
 
     public:
+        static double hang_speed;
+        static bool parking;
+        static bool load;
+        
         static bool grabberState;
         static void update();
         static void initialize();

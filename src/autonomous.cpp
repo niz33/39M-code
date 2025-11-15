@@ -28,6 +28,17 @@ void turn(int angle, int time){
     currentAngle-=chassis.getPose().theta;
 }
 
+void Autonomous::print(){
+    while (true) {
+        // print robot location to the brain screen
+        pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
+        pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
+        pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+        // delay to save resources
+        pros::delay(100);
+    }
+}
+
 // void Autonomous::initialize(){
 //     // lemlib initialization
 //     inertial.reset(true); // reset inertial sensor
@@ -89,9 +100,9 @@ void turn(int angle, int time){
 void Autonomous::test(){
     leftWheels.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
 	rightWheels.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
-    currentAngle=0;
     chassis.setPose(0,0,0);
-    turn(180,1500);
+    chassis.moveToPose(0,48,0,5000,{},false);
+    chassis.moveToPose(0,0,0,5000,{.forwards=false},false);
 }
 
 // void blueNegativeAuton(){
@@ -147,10 +158,72 @@ void Autonomous::matchLeftAuton1(){
 }
 
 void Autonomous::matchLeftAuton2(){
+
+    chassis.setPose(0,0,167);
+    intakeMotor.move_voltage(-3000);
+        rampMotor.move_voltage(12000);
+        midMotor.move_voltage(-3000);
     
-    chassis.moveToPoint(-8,24,1250,{.forwards=false});
-    chassis.moveToPose(4,35,45,1250,{});
-    // pros::delay(2500);
+    chassis.moveToPose(-8,24,167 ,1500,{.forwards=false},false);
+    
+    chassis.moveToPose(15,48,45,1250,{},false);
+    intakeMotor.move_voltage(-10000);
+        rampMotor.move_voltage(-6000);
+        midMotor.move_voltage(0);
+        pros::delay(500);
+    midMotor.move_voltage(10000);
+    intakeMotor.move_voltage(10000); 
+    rampMotor.move_voltage(12000);
+
+    pros::delay(2000);
+    midMotor.move_voltage(0);
+    intakeMotor.move_voltage(0);
+    rampMotor.move_voltage(0);
+
+    pneumatic.set_value(true);
+
+    chassis.moveToPoint(-36,-20,1000,{.forwards=false},false);
+    // chassis.moveToPose(-35,-25,0,750,{.forwards=false},false);
+    chassis.turnToHeading(0,750,{},false);
+    drivetrain.leftMotors->move_voltage(-3000);
+    drivetrain.rightMotors->move_voltage(-3000);
+    intakeMotor.move_voltage(-3000);
+    rampMotor.move_voltage(12000);
+    midMotor.move_voltage(-3000);
+    pros::delay(2000);
+
+    chassis.moveToPose(-32,50,0,5000,{},true);
+    pros::delay(1500);
+    rampMotor.move_voltage(12000);
+    drivetrain.leftMotors->move_voltage(6000);
+    drivetrain.rightMotors->move_voltage(6000);
+
+    int cDelay=3;
+    std::queue<int> cRight;
+    int countdown=0;
+    while(true){
+        int temp=1;
+        if (cSensor.get_hue()<35) temp=0;
+        cRight.push(temp);
+        if(cRight.size()>=cDelay&&cRight.front()==0){
+            countdown=10;
+        }
+        if(countdown>0) countdown--;
+        if(countdown>0){
+            midMotor.move_voltage(10000);
+            intakeMotor.move_voltage(2000);
+        }
+        else{
+            midMotor.move_voltage(-10000);
+            intakeMotor.move_voltage(10000);
+        }
+        if(cRight.size()>=cDelay){
+            cRight.pop();
+        }
+        pros::delay(10);
+    }
+    
+    
     // chassis.turnToHeading(-90,750,{},false);
     // move(22,1250);
     // pneumatic.set_value(false);
@@ -233,84 +306,62 @@ void Autonomous::matchLeftAuton2(){
 
 // }
 
-// void Autonomous::skillsAuton(){
-//     currentAngle=0;
-//     chassis.setPose(0,0,0);
+void Autonomous::skillsAuton(){
+    chassis.setPose(0,0,-90);
 
-//     //------------------------------------------------------------------
-//     //===Phase 0: initial wall stake acoring===
-//     rampMotor.move_velocity(600);
-//     pros::delay(1300);
-//     rampMotor.move_velocity(0);
-    
-//     //------------------------------------------------------------------
-//     //===Phase 1: first mobile goal===
-//     //chassis.moveToPoint(0,12,1200,{},false);
-//     // move(12,1200);
-//     //chassis.turnToHeading(-90,1200, {.direction = lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
-//     // turn(90,1200);
-//     //chassis.moveToPoint(14,12, 1500,{.forwards = false}, false);
-//     chassis.moveToPose(24,12,-90,2500,{.forwards=false},false);
-//     // move(-14,1500);
-//     clamp.set_value(true);
-//     rampMotor.move_velocity(-600);
-//     pros::delay(500);
-//     //chassis.moveToPoint(22,12,1200,{.forwards = false}, false);
-//     // move(-8,1200);
-//     //chassis.turnToHeading(0,1200,{},false);
-//     // turn(0,1200);
-//     intakeMotor.move_velocity(600);
-//     rampMotor.move_velocity(600);
-//     chassis.moveToPose(32,36,60,3000,{},false);
-//     chassis.moveToPoint(54,36,3000,{},false);
-//     chassis.moveToPoint(60,60,3000,{},false);
-//     chassis.moveToPoint(60,10,3000,{},false);
-//     chassis.moveToPoint(52,10,1500,{}, false);
-//     chassis.moveToPoint(52,2,1500,{}, false);
-//     chassis.moveToPoint(63,-2,1500,{.forwards=false}, false);
-//     // move(22,3000);
-//     //chassis.turnToHeading(90,1200,{},false);
-//     // turn(-90,1200);
-//     //chassis.moveToPoint(37,36,2500,{},false);
-//     // move(15,2500);
-//     //chassis.moveToPoint(44,36,2500,{},false);
-//     // move(7,1200);
-//     //chassis.turnToHeading(180,1200,{},false);
-//     // turn(-180,1200);
-//     //chassis.moveToPoint(44,1,2500,{},false);
-//     // move(35,2500);
-//     //chassis.moveToPoint(44,4,1000,{.forwards = false}, false);
-//     // move(-3,1000);
-//     //chassis.turnToHeading(250,1200,{},false);
-//     // turn(70,1200);
-//     //chassis.moveToPoint(50,-2,1200,{.forwards = false}, false);
-//     // move(-12,1200);
+    chassis.moveToPose(33,0,0,2000,{.forwards=false},false);
+    chassis.turnToHeading(0,1000,{},false);
 
-//     rampMotor.move_velocity(0);
+    pneumatic.set_value(true);
 
-//     clamp.set_value(false);
-//     return;
-//     //------------------------------------------------------------------
-//     //===Phase 2: second mobile goal===
-//     currentAngle-=10;
-//     move(23,1200);
-//     turn(-90,1200);
-//     move(-50,3000);
-    
-//     move(-4,750);
-//     move(-5,750);
-//     clamp.set_value(true);
-//     rampMotor.move_velocity(600); 
-//     // turn(-60,1200);
-//     // move(-50,2000);
-//     // clamp.set_value(false);
-//     // return;
-//     turn(80,1700);
-//     move(30,2500);
-//     turn(-30,1500);
-//     move(-12,1200);
-//     clamp.set_value(false);
-// }
+    drivetrain.leftMotors->move_voltage(-3000);
+    drivetrain.rightMotors->move_voltage(-3000);
+    intakeMotor.move_voltage(-3000);
+    rampMotor.move_voltage(12000);
+    midMotor.move_voltage(-3000);
+    pros::delay(3000);
+
+    chassis.moveToPose(31,50,0,2000,{},true);
+    pros::delay(1500);
+    rampMotor.move_voltage(12000);
+    midMotor.move_voltage(-10000);
+    intakeMotor.move_voltage(10000);
+    drivetrain.leftMotors->move_voltage(6000);
+    drivetrain.rightMotors->move_voltage(6000);
+    pros::delay(3000);
+
+    chassis.setPose(0,0,0);
+    pneumatic.set_value(false);
+    chassis.moveToPoint(0,-20,400,{.forwards=false},false);
+    chassis.moveToPose(18,0,-180,1200,{.forwards=false},false);
+    chassis.moveToPose(16,60,-180,3000,{.forwards=false},false);
+    chassis.moveToPose(4,80,-180,3000,{.forwards=false},false);
+
+    pneumatic.set_value(true);
+
+    drivetrain.leftMotors->move_voltage(-3000);
+    drivetrain.rightMotors->move_voltage(-3000);
+    intakeMotor.move_voltage(-3000);
+    rampMotor.move_voltage(12000);
+    midMotor.move_voltage(-3000);
+    pros::delay(3000);
+
+    chassis.moveToPose(4,20,-180,2000,{},true);
+    pros::delay(1500);
+    rampMotor.move_voltage(12000);
+    midMotor.move_voltage(-10000);
+    intakeMotor.move_voltage(10000);
+    drivetrain.leftMotors->move_voltage(6000);
+    drivetrain.rightMotors->move_voltage(6000);
+    pros::delay(3000);
+
+    chassis.setPose(0,0,0);
+    pneumatic.set_value(false);
+    chassis.moveToPose(30,-33,-90,2000,{.forwards=false},false);
+    chassis.moveToPoint(60,-33,1500,{.forwards=false},false);
+    chassis.moveToPoint(50,-33,1500,{.forwards=true},false);
+
+}
 
 
 

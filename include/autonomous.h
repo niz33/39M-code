@@ -16,6 +16,7 @@ class Autonomous{
     static void test();
     static void skillsAuton();
     static void skillsAuton2();
+    static void print();
 
 
     private:

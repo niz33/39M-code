@@ -23,8 +23,8 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	// pros::lcd::initialize();
-	// pros::lcd::set_text(1, "Hello PROS User!");
+	 pros::lcd::initialize();
+	 pros::lcd::set_text(1, "Hello PROS User!");
 
 	// pros::lcd::register_btn1_cb(on_center_button);
 	// // Autonomous::initialize();
@@ -32,6 +32,8 @@ void initialize() {
 	// pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate sensors
     // print position to brain screen
+	leftWheels.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
+	rightWheels.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
        
 }
 
@@ -65,9 +67,9 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	chassis.setPose(0,0,165);
-	chassis.calibrate(); // calibrate sensors
-	pros::delay(2000);
+	
+	//chassis.calibrate(); // calibrate sensors
+	//pros::delay(2000);
 	// while (true) {
     //         // print robot location to the brain screen
     //         pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
@@ -76,8 +78,9 @@ void autonomous() {
     //         // delay to save resources
     //         pros::delay(10);
     //     }
-	Autonomous::matchLeftAuton2();
+	//Autonomous::matchLeftAuton2();
 	//Autonomous::test();
+	Autonomous::skillsAuton();
 }
 
 /**
