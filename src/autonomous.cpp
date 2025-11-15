@@ -332,6 +332,12 @@ void Autonomous::skillsAuton(){
     drivetrain.leftMotors->move_voltage(6000);
     drivetrain.rightMotors->move_voltage(6000);
     pros::delay(3000);
+    drivetrain.leftMotors->move_voltage(-6000);
+    drivetrain.rightMotors->move_voltage(-6000);
+    pros::delay(500);
+    drivetrain.leftMotors->move_voltage(12000);
+    drivetrain.rightMotors->move_voltage(12000);
+    pros::delay(500);
 
     chassis.setPose(0,0,0);
     pneumatic.set_value(false);
@@ -357,12 +363,20 @@ void Autonomous::skillsAuton(){
     drivetrain.leftMotors->move_voltage(6000);
     drivetrain.rightMotors->move_voltage(6000);
     pros::delay(3000);
+    drivetrain.leftMotors->move_voltage(-6000);
+    drivetrain.rightMotors->move_voltage(-6000);
+    pros::delay(500);
+    drivetrain.leftMotors->move_voltage(12000);
+    drivetrain.rightMotors->move_voltage(12000);
+    pros::delay(500);
 
     chassis.setPose(0,0,0);
     pneumatic.set_value(false);
     chassis.moveToPose(30,-33,-90,2000,{.forwards=false},false);
     chassis.moveToPoint(60,-33,1500,{.forwards=false},false);
     chassis.moveToPoint(50,-33,1500,{.forwards=true},false);
+
+    
 
 }
 
