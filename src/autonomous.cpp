@@ -340,6 +340,9 @@ void Autonomous::skillsAuton(){
     pros::delay(500);
 
     chassis.setPose(0,0,0);
+    rampMotor.move_voltage(0);
+    midMotor.move_voltage(0);
+    intakeMotor.move_voltage(0);
     pneumatic.set_value(false);
     chassis.moveToPoint(0,-20,400,{.forwards=false},false);
     chassis.moveToPose(18,0,-180,1200,{.forwards=false},false);
