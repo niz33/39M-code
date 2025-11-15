@@ -210,8 +210,10 @@ void Autonomous::matchLeftAuton2(){
         }
         if(countdown>0) countdown--;
         if(countdown>0){
-            midMotor.move_voltage(10000);
-            intakeMotor.move_voltage(2000);
+            //midMotor.move_voltage(10000);
+            //intakeMotor.move_voltage(2000);
+            midMotor.move_voltage(-10000);
+            intakeMotor.move_voltage(10000);
         }
         else{
             midMotor.move_voltage(-10000);
