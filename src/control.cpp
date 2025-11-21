@@ -3,6 +3,7 @@
 bool Control::grabberState = false;
 double target = wallStakeMotor.get_position();
 double Control::hang_speed = 0;
+bool Control::descoring = false;
 bool Control::parking = false;
 bool Control::load = false;
 int Control::cDelay = 3;
@@ -149,14 +150,13 @@ void Control::initialize(){
 }
 
 void Control::park(){
-    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)){
-            Control::parking=1-Control::parking;
-			parkl.set_value(parking);
-            parkr.set_value(parking);
-	}
     if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)){
             Control::load=1-Control::load;
 			pneumatic.set_value(load);
+	}
+    if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)){
+            Control::descoring=1-Control::descoring;
+			descore.set_value(descoring);
 	}
 }
 

@@ -164,9 +164,9 @@ void Autonomous::matchLeftAuton2(){
         rampMotor.move_voltage(12000);
         midMotor.move_voltage(-3000);
     
-    chassis.moveToPose(-8,24,167 ,1500,{.forwards=false},false);
+    chassis.moveToPose(-8,26,167 ,1500,{.forwards=false},false);
     
-    chassis.moveToPose(15,48,45,1250,{},false);
+    chassis.moveToPose(17,48,45,1500,{},false);
     intakeMotor.move_voltage(-10000);
         rampMotor.move_voltage(-6000);
         midMotor.move_voltage(0);
@@ -175,29 +175,156 @@ void Autonomous::matchLeftAuton2(){
     intakeMotor.move_voltage(10000); 
     rampMotor.move_voltage(12000);
 
-    pros::delay(1500);
-    midMotor.move_voltage(-5000);
-    intakeMotor.move_voltage(-5000);
+    pros::delay(2500);
+    midMotor.move_voltage(-2000);
+    intakeMotor.move_voltage(-2000);
     rampMotor.move_voltage(0);
     pros::delay(500);
 
     pneumatic.set_value(true);
 
-    chassis.moveToPoint(-36,-20,1000,{.forwards=false},false);
+    chassis.moveToPoint(-33,-15,1000,{.forwards=false},false);
     // chassis.moveToPose(-35,-25,0,750,{.forwards=false},false);
     chassis.turnToHeading(0,750,{},false);
-    drivetrain.leftMotors->move_voltage(-3000);
-    drivetrain.rightMotors->move_voltage(-3000);
+    drivetrain.leftMotors->move_voltage(-10000);
+    drivetrain.rightMotors->move_voltage(-10000);
+    pros::delay(500);
+    drivetrain.leftMotors->move_voltage(-2000);
+    drivetrain.rightMotors->move_voltage(-2000);
     intakeMotor.move_voltage(-3000);
     rampMotor.move_voltage(12000);
     midMotor.move_voltage(-3000);
     pros::delay(2000);
 
-    chassis.moveToPose(-32,50,0,5000,{},true);
+    chassis.moveToPose(-32,50,0,1500,{},false); 
+    drivetrain.leftMotors->move_voltage(12000);
+    drivetrain.rightMotors->move_voltage(12000);
+    
+    pros::delay(200);
+    chassis.setPose(0,0,0);
+    midMotor.move_voltage(5000); 
+    intakeMotor.move_voltage(-5000);
+    chassis.moveToPose(0,-1.5,0,300,{},true);
+    rampMotor.move_voltage(12000);
+    midMotor.move_voltage(-10000);
+    intakeMotor.move_voltage(10000);
+
+    int cDelay=1;
+    std::queue<int> cRight;
+    int countdown=0;
+    while(true){
+        int temp=1;
+        if (cSensor.get_hue()<35) temp=0;
+        cRight.push(temp);
+        if(cRight.size()>=cDelay&&cRight.front()==0){
+            countdown=13;
+        }
+        if(countdown>0) countdown--;
+        if(countdown>0){
+            midMotor.move_voltage(10000);
+            intakeMotor.move_voltage(2000);
+            // midMotor.move_voltage(-10000);
+            // intakeMotor.move_voltage(10000);
+        }
+        else{
+            midMotor.move_voltage(-10000);
+            intakeMotor.move_voltage(10000);
+        }
+        if(cRight.size()>=cDelay){
+            cRight.pop();
+        }
+        pros::delay(10);
+    }
+    
+    
+    // chassis.turnToHeading(-90,750,{},false);
+    // move(22,1250);
+    // pneumatic.set_value(false);
+
+    // pros::delay(1500);
+    // move(-10,750);
+    // turn(-45,1000);
+    // move(40,1250);
+    // intakeMotor.move_voltage(10000);
+    //     rampMotor.move_voltage(12000);
+    //     midMotor.move_voltage(-10000);
+}
+
+void Autonomous::matchLeftAuton3(){
+
+    rampMotor.move_voltage(12000);
+
+    int cDelay=1;
+    std::queue<int> cRight;
+    int countdown=0;
+    while(true){
+        int temp=1;
+        if (cSensor.get_hue()<35) temp=0;
+        cRight.push(temp);
+        if(cRight.size()>=cDelay&&cRight.front()==0){
+            countdown=13;
+        }
+        if(countdown>0) countdown--;
+        if(countdown>0){
+            midMotor.move_voltage(10000);
+            intakeMotor.move_voltage(2000);
+            // midMotor.move_voltage(-10000);
+            // intakeMotor.move_voltage(10000);
+        }
+        else{
+            midMotor.move_voltage(-10000);
+            intakeMotor.move_voltage(10000);
+        }
+        if(cRight.size()>=cDelay){
+            cRight.pop();
+        }
+        pros::delay(10);
+    }
+
+}
+
+void Autonomous::matchRightAuton2(){
+
+    chassis.setPose(0,0,-167);
+    intakeMotor.move_voltage(-3000);
+        rampMotor.move_voltage(12000);
+        midMotor.move_voltage(-3000);
+    
+    chassis.moveToPose(5,28,167,1500,{.forwards=false},false);
+    
+    // chassis.moveToPose(15,48,45,1250,{},false);
+    // intakeMotor.move_voltage(-10000);
+    //     rampMotor.move_voltage(-6000);
+    //     midMotor.move_voltage(0);
+    //     pros::delay(500);
+    // midMotor.move_voltage(10000);
+    // intakeMotor.move_voltage(10000); 
+    // rampMotor.move_voltage(12000);
+
+    // pros::delay(1500);
+    // midMotor.move_voltage(-5000);
+    // intakeMotor.move_voltage(-5000);
+    // rampMotor.move_voltage(0);
+    // pros::delay(500);
+
+    pneumatic.set_value(true);
+
+    chassis.moveToPoint(35,-10,1200,{.forwards=false},false);
+    // chassis.moveToPose(-35,-25,0,750,{.forwards=false},false);
+    chassis.turnToHeading(0,750,{},false);
+    chassis.moveToPoint(33,-20,500,{.forwards=false},false);
+    drivetrain.leftMotors->move_voltage(-1000);
+    drivetrain.rightMotors->move_voltage(-1000);
+    intakeMotor.move_voltage(-3000);
+    rampMotor.move_voltage(12000);
+    midMotor.move_voltage(-3000);
+    pros::delay(1000);
+
+    chassis.moveToPose(31,50,0,5000,{},true);
     pros::delay(1500);
     rampMotor.move_voltage(12000);
-    drivetrain.leftMotors->move_voltage(6000);
-    drivetrain.rightMotors->move_voltage(6000);
+    drivetrain.leftMotors->move_voltage(8000);
+    drivetrain.rightMotors->move_voltage(8000);
 
     int cDelay=3;
     std::queue<int> cRight;
@@ -211,10 +338,10 @@ void Autonomous::matchLeftAuton2(){
         }
         if(countdown>0) countdown--;
         if(countdown>0){
-            //midMotor.move_voltage(10000);
-            //intakeMotor.move_voltage(2000);
-            midMotor.move_voltage(-10000);
-            intakeMotor.move_voltage(10000);
+            midMotor.move_voltage(10000);
+            intakeMotor.move_voltage(2000);
+            //midMotor.move_voltage(-10000);
+            //intakeMotor.move_voltage(10000);
         }
         else{
             midMotor.move_voltage(-10000);

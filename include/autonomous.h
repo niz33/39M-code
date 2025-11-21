@@ -12,7 +12,8 @@ class Autonomous{
     static void correctHeading();
     static void matchLeftAuton1();
     static void matchLeftAuton2();
-    static void matchRightAuton();
+    static void matchLeftAuton3();
+    static void matchRightAuton2();
     static void test();
     static void skillsAuton();
     static void skillsAuton2();

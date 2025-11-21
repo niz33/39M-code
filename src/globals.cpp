@@ -26,6 +26,7 @@ pros::Optical cSensor(9);
 
 pros::ADIDigitalOut parkl('A', false);
 pros::ADIDigitalOut parkr('B', false);
+pros::ADIDigitalOut descore('D', false);
 
 pros::ADIDigitalOut pneumatic('C', false);
  

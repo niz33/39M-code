@@ -21,6 +21,7 @@ class Control{
         static double hang_speed;
         static bool parking;
         static bool load;
+        static bool descoring;
         
         static bool grabberState;
         static void update();

@@ -38,6 +38,7 @@ extern pros::Motor wallStakeMotor;
 
 extern pros::ADIDigitalOut parkl;
 extern pros::ADIDigitalOut parkr;
+extern pros::ADIDigitalOut descore;
 
 extern bool grabber;
 
