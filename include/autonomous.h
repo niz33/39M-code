@@ -14,6 +14,7 @@ class Autonomous{
     static void matchLeftAuton2();
     static void matchLeftAuton3();
     static void matchRightAuton2();
+    static void matchSolo();
     static void test();
     static void skillsAuton();
     static void skillsAuton2();

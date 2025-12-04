@@ -75,9 +75,9 @@ lemlib::OdomSensors sensors(&vertical_tracking_wheel,
 );
 
 lemlib::ControllerSettings lateral_controller(
-  10, //kP
+  9, //kP
   0.0, //kI
-  0.0, //kD
+  10, //kD
   3.0, // anti windup
   1, // small error range in inches
   100, // small error range timeout, in miliseconds
