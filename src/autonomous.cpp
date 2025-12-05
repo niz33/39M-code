@@ -99,12 +99,11 @@ void Autonomous::matchLeftAuton2(){
     
     chassis.moveToPose(-8,26,167 ,1500,{.forwards=false},false);
     
-    chassis.moveToPose(16,50,45,1500,{},true);
-    pros::delay(800);
+    chassis.moveToPose(16,50,45,1500,{},false);
     intakeMotor.move_voltage(-10000);
-    rampMotor.move_voltage(-12000);
-    midMotor.move_voltage(0);
-    pros::delay(500);
+        rampMotor.move_voltage(-12000);
+        midMotor.move_voltage(0);
+        pros::delay(600);
     midMotor.move_voltage(10000);
     intakeMotor.move_voltage(10000); 
     rampMotor.move_voltage(12000);
@@ -126,9 +125,9 @@ void Autonomous::matchLeftAuton2(){
     drivetrain.leftMotors->move_voltage(-10000);
     drivetrain.rightMotors->move_voltage(-10000);
     pros::delay(500);
-    drivetrain.leftMotors->move_voltage(-3000);
-    drivetrain.rightMotors->move_voltage(-3000);
-    pros::delay(700);
+    drivetrain.leftMotors->move_voltage(-4000);
+    drivetrain.rightMotors->move_voltage(-4000);
+    pros::delay(1200);
 
     chassis.moveToPose(-33,50,0,1300,{},false); 
     drivetrain.leftMotors->move_voltage(12000);
@@ -259,16 +258,16 @@ void Autonomous::matchRightAuton2(){
     drivetrain.leftMotors->move_voltage(-10000);
     drivetrain.rightMotors->move_voltage(-10000);
     pros::delay(200);
-    drivetrain.leftMotors->move_voltage(-4000);
-    drivetrain.rightMotors->move_voltage(-4000);
-    pros::delay(900);
+    drivetrain.leftMotors->move_voltage(-6000);
+    drivetrain.rightMotors->move_voltage(-6000);
+    pros::delay(1100);
 
-    chassis.moveToPose(32.5,30,0,5000,{},true);
+    chassis.moveToPoint(32.5,30,1300,{},true);
     pros::delay(1000);
     rampMotor.move_voltage(12000);
-    drivetrain.leftMotors->move_voltage(8000);
-    drivetrain.rightMotors->move_voltage(8000);
-
+    chassis.setPose(0,0,0);
+    pros::delay(300);
+    chassis.moveToPose(0,-1.5,0,300,{},false);
     int cDelay=3;
     std::queue<int> cRight;
     int countdown=0;
@@ -299,11 +298,11 @@ void Autonomous::matchRightAuton2(){
         pros::delay(10);
 
     }
-    chassis.setPose(0,0,0);
+    
     chassis.moveToPoint(-11.5,-10,1000,{.forwards=false},false);
     descore.set_value(true);
     chassis.turnToHeading(0,750,{},false);
-    chassis.moveToPose(-12,35,0,3000,{.forwards=true},false);
+    chassis.moveToPose(-12,30,0,3000,{.forwards=true},false);
     
     
     // chassis.turnToHeading(-90,750,{},false);
@@ -322,9 +321,9 @@ void Autonomous::matchRightAuton2(){
 
 
 void Autonomous::skillsAuton(){
-    chassis.setPose(0,0,-90);
+    chassis.setPose(0,0,90);
 
-    chassis.moveToPose(33,0,0,2000,{.forwards=false},false);
+    chassis.moveToPose(-32,0,0,2000,{.forwards=false},false);
     chassis.turnToHeading(0,1000,{},false);
 
     pneumatic.set_value(true);
@@ -334,61 +333,44 @@ void Autonomous::skillsAuton(){
     intakeMotor.move_voltage(-3000);
     rampMotor.move_voltage(12000);
     midMotor.move_voltage(-3000);
-    pros::delay(3000);
+    pros::delay(5000);
+    intakeMotor.move_voltage(0);
+    rampMotor.move_voltage(0);
+    midMotor.move_voltage(0);
 
-    chassis.moveToPose(31,50,0,2000,{},true);
-    pros::delay(1500);
+    chassis.moveToPose(0,5,-90,2500,{.forwards=false},false);
+    chassis.moveToPoint(70,5,2000,{.forwards=false},false);
+    chassis.turnToHeading(0,1000,{},false);
+    chassis.moveToPoint(70,20,1500,{.forwards=true},false);
     rampMotor.move_voltage(12000);
     midMotor.move_voltage(-10000);
     intakeMotor.move_voltage(10000);
-    drivetrain.leftMotors->move_voltage(4000);
-    drivetrain.rightMotors->move_voltage(4000);
-    pros::delay(3000);
-    drivetrain.leftMotors->move_voltage(-6000);
-    drivetrain.rightMotors->move_voltage(-6000);
-    pros::delay(500);
-    drivetrain.leftMotors->move_voltage(12000);
-    drivetrain.rightMotors->move_voltage(12000);
-    pros::delay(500);
     chassis.setPose(0,0,chassis.getPose().theta);
-    rampMotor.move_voltage(0);
-    midMotor.move_voltage(0);
-    intakeMotor.move_voltage(0);
-    pneumatic.set_value(false);
-    chassis.moveToPoint(0,-20,400,{.forwards=false},false);
-    chassis.moveToPose(-18,0,-180,1200,{.forwards=false},false);
-    chassis.moveToPose(-16,60,-180,3000,{.forwards=false},false);
-    chassis.moveToPose(-4,80,-180,3000,{.forwards=false},false);
+    pros::delay(5000);
 
-    pneumatic.set_value(true);
-
-    drivetrain.leftMotors->move_voltage(-3000);
-    drivetrain.rightMotors->move_voltage(-3000);
     intakeMotor.move_voltage(-3000);
     rampMotor.move_voltage(12000);
     midMotor.move_voltage(-3000);
-    pros::delay(3000);
-
-    chassis.moveToPose(-4,20,-180,2000,{},true);
-    pros::delay(1500);
+    chassis.moveToPoint(0,-30,1500,{.forwards=false},false);
+    pros::delay(5000);
+    chassis.moveToPoint(0,10,2000,{},true);
     rampMotor.move_voltage(12000);
     midMotor.move_voltage(-10000);
     intakeMotor.move_voltage(10000);
-    drivetrain.leftMotors->move_voltage(6000);
-    drivetrain.rightMotors->move_voltage(6000);
-    pros::delay(3000);
-    drivetrain.leftMotors->move_voltage(-6000);
-    drivetrain.rightMotors->move_voltage(-6000);
-    pros::delay(500);
-    drivetrain.leftMotors->move_voltage(12000);
-    drivetrain.rightMotors->move_voltage(12000);
-    pros::delay(500);
-
+    pros::delay(5000);
     chassis.setPose(0,0,chassis.getPose().theta);
+    rampMotor.move_voltage(12000);
+    midMotor.move_voltage(-10000);
+    intakeMotor.move_voltage(10000);
     pneumatic.set_value(false);
-    chassis.moveToPose(30,-33,-90,2000,{.forwards=false},false);
-    chassis.moveToPoint(60,-33,1500,{.forwards=false},false);
-    chassis.moveToPoint(50,-33,1500,{.forwards=true},false);
+
+
+    chassis.moveToPose(-33,-32,90,3000,{.forwards=false},false);
+    pneumatic.set_value(true);
+    chassis.moveToPoint(-43,-32,3000,{.forwards=false},false);
+    pneumatic.set_value(false);
+    chassis.moveToPoint(-35,-32,1500,{.forwards=true},false);
+    chassis.moveToPoint(-49,-32,1500,{.forwards=false},false);
 
     
 
@@ -419,15 +401,17 @@ void Autonomous::skillsAuton2(){
     drivetrain.rightMotors->move_voltage(4000);
     pros::delay(5000);
     chassis.setPose(0,0,chassis.getPose().theta);
-    rampMotor.move_voltage(0);
-    midMotor.move_voltage(0);
-    intakeMotor.move_voltage(0);
+    rampMotor.move_voltage(12000);
+    midMotor.move_voltage(-10000);
+    intakeMotor.move_voltage(10000);
     pneumatic.set_value(false);
 
     chassis.moveToPose(-33,-32,90,3000,{.forwards=false},false);
     pneumatic.set_value(true);
-    chassis.moveToPoint(-43,-32,10000,{.forwards=false},false);
-
+    chassis.moveToPoint(-43,-32,3000,{.forwards=false},false);
+    pneumatic.set_value(false);
+    chassis.moveToPoint(-35,-32,1500,{.forwards=true},false);
+    chassis.moveToPoint(-50,-32,1500,{.forwards=false},false);
     
 
     
