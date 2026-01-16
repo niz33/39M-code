@@ -15,7 +15,7 @@ pros::Motor rightWheel1(-11,pros::v5::MotorGears::blue);
 pros::Motor rightWheel2(12,pros::v5::MotorGears::blue);
 pros::Motor rightWheel3(13,pros::v5::MotorGears::blue);
 // pros::MotorGroup rightWheels({16},pros::v5::MotorGears::blue);
-pros::MotorGroup rightWheels({-11,12,13},pros::v5::MotorGears::blue);
+pros::MotorGroup rightWheels({-6,7,13},pros::v5::MotorGears::blue); 
 
 //intake
 pros::Motor rampMotor(-1, pros::v5::MotorGears::blue);

@@ -78,10 +78,10 @@ void autonomous() {
     //         // delay to save resources
     //         pros::delay(10);
     //     }
-	//Autonomous::matchLeftAuton2();
+	Autonomous::matchLeftAuton2();
 	//Autonomous::matchSolo();
 	//Autonomous::test();
-	Autonomous::skillsAuton2();
+	//Autonomous::skillsAuton();
 }
 
 /**
