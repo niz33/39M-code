@@ -99,16 +99,16 @@ void Autonomous::matchLeftAuton2(){
     
     chassis.moveToPose(-8,26,167 ,1500,{.forwards=false},false);
     
-    chassis.moveToPose(16,50,45,1500,{},false);
+    chassis.moveToPose(18,52,45,1500,{},false);
     intakeMotor.move_voltage(-10000);
         rampMotor.move_voltage(-12000);
         midMotor.move_voltage(0);
-        pros::delay(300);
+        pros::delay(200);
     midMotor.move_voltage(10000);
     intakeMotor.move_voltage(10000); 
     rampMotor.move_voltage(12000);
 
-    pros::delay(2100);
+    pros::delay(2500);
     midMotor.move_voltage(-2000);
     intakeMotor.move_voltage(-2000);
     rampMotor.move_voltage(0);
@@ -118,13 +118,13 @@ void Autonomous::matchLeftAuton2(){
 
     rampMotor.move_voltage(12000);
     midMotor.move_voltage(-3000);
-    chassis.moveToPoint(-29,0,1200,{.forwards=false},false);
+    chassis.moveToPoint(-31,0,1400,{.forwards=false},false);
     
     // chassis.moveToPose(-35,-25,0,750,{.forwards=false},false);
     chassis.turnToHeading(0,750,{},false);
     intakeMotor.move_voltage(-3000);
-    drivetrain.leftMotors->move_voltage(-60000);
-    drivetrain.rightMotors->move_voltage(-60000);
+    drivetrain.leftMotors->move_velocity(-300);
+    drivetrain.rightMotors->move_velocity(-300);
     pros::delay(300);
     drivetrain.leftMotors->move_voltage(-4000);
     drivetrain.rightMotors->move_voltage(-4000);
@@ -146,26 +146,38 @@ void Autonomous::matchLeftAuton2(){
     int cDelay=10;
     std::queue<int> cRight;
     int countdown=0;
+    int flag=0;
     while(true){
         int temp=1;
-        if (cSensor.get_hue()>115) temp=0;
+        //score red
+        if (cSensor.get_hue()<35) temp=0;
+        //score blue
+        //if (cSensor.get_hue()<22) temp=0;
         cRight.push(temp);
-        if(cRight.size()>=cDelay&&cRight.front()==0){
-            countdown=13;
-        }
-        if(countdown>0) countdown--;
-        if(countdown>0){
-            midMotor.move_voltage(10000);
-            intakeMotor.move_voltage(2000);
-            // midMotor.move_voltage(-10000);
-            // intakeMotor.move_voltage(10000);
-        }
-        else{
-            midMotor.move_voltage(-10000);
-            intakeMotor.move_voltage(10000);
+        if(cRight.front()==0){
+            flag=1;
         }
         if(cRight.size()>=cDelay){
             cRight.pop();
+        }
+        if(flag==1){
+        //     intakeMotor.move_voltage(-3000);
+        // rampMotor.move_voltage(12000);
+        // midMotor.move_voltage(-3000);
+            // midMotor.move_voltage(-10000);
+            // intakeMotor.move_voltage(10000);
+            // rampMotor.move_voltage(12000);
+        //     midMotor.move_voltage(10000);
+        // intakeMotor.move_voltage(10000);
+        // rampMotor.move_voltage(12000);
+        midMotor.move_voltage(-10000);
+            intakeMotor.move_voltage(10000);
+            rampMotor.move_voltage(12000);
+        }
+        if(flag==0){
+            midMotor.move_voltage(-10000);
+            intakeMotor.move_voltage(10000);
+            rampMotor.move_voltage(12000);
         }
         if (pros::millis() >= 14800 + originalTime){
             drivetrain.leftMotors->move_voltage(-12000);
@@ -231,7 +243,7 @@ void Autonomous::matchRightAuton2(){
         rampMotor.move_voltage(12000);
         midMotor.move_voltage(-3000);
     
-    chassis.moveToPose(5,28,167,1500,{.forwards=false},false);
+    chassis.moveToPose(7,28,167,1500,{.forwards=false},false);
     
     // chassis.moveToPose(15,48,45,1250,{},false);
     // intakeMotor.move_voltage(-10000);
@@ -250,31 +262,34 @@ void Autonomous::matchRightAuton2(){
 
     pneumatic.set_value(true);
 
-    chassis.moveToPoint(29.5,0,1300,{.forwards=false},false);
+    chassis.moveToPoint(32,0,1300,{.forwards=false},false);
+    chassis.turnToHeading(-9 ,500,{},false);
     // chassis.moveToPose(-35,-25,0,750,{.forwards=false},false);
     intakeMotor.move_voltage(-3000);
     rampMotor.move_voltage(12000);
     midMotor.move_voltage(-3000);
-    chassis.turnToHeading(0,1000,{},false);
+    chassis.turnToPoint(26,-10,1000,{.forwards=false},false);
     drivetrain.leftMotors->move_voltage(-10000);
     drivetrain.rightMotors->move_voltage(-10000);
     pros::delay(200);
     drivetrain.leftMotors->move_voltage(-4000);
     drivetrain.rightMotors->move_voltage(-4000);
     pros::delay(1100);
-    chassis.setPose(0,0,0);
-
-    chassis.moveToPoint(1,25,1300,{},true);
+    //chassis.turnToPoint(32,21,500,{},false);
+    chassis.moveToPoint(35,21,1300,{},true);
     pros::delay(1000);
     rampMotor.move_voltage(12000);
+    chassis.moveToPoint(32,31,1300,{},true);
     chassis.setPose(0,0,0);
+    //chassis.moveToPoint(0,-1.5,150,{},true);
     pros::delay(300);
-    drivetrain.leftMotors->move_voltage(4000);
-    drivetrain.rightMotors->move_voltage(4000);
     // chassis.moveToPose(0,-1,0,300,{.forwards=false},false);
     int cDelay=3;
     std::queue<int> cRight;
     int countdown=0;
+    midMotor.move_voltage(-10000);
+    intakeMotor.move_voltage(12000);
+    rampMotor.move_voltage(12000);
     while(true){
         int temp=1;
         if (cSensor.get_hue()<455) temp=0;
@@ -284,14 +299,14 @@ void Autonomous::matchRightAuton2(){
         }
         if(countdown>0) countdown--;
         if(countdown>0){
-            midMotor.move_voltage(10000);
-            intakeMotor.move_voltage(2000);
-            //midMotor.move_voltage(-10000);
-            //intakeMotor.move_voltage(10000);
+            // midMotor.move_voltage(10000);
+            // intakeMotor.move_voltage(2000);
+            // // midMotor.move_voltage(-10000);
+            // // intakeMotor.move_voltage(10000);
         }
         else{
-            midMotor.move_voltage(-10000);
-            intakeMotor.move_voltage(10000);
+            // midMotor.move_voltage(-10000);
+            // intakeMotor.move_voltage(10000);
         }
         if(cRight.size()>=cDelay){
             cRight.pop();
@@ -308,7 +323,7 @@ void Autonomous::matchRightAuton2(){
     chassis.moveToPoint(-11.5,-10,1000,{.forwards=false},false);
     descore.set_value(true);
     chassis.turnToHeading(0,750,{},false);
-    chassis.moveToPose(-12,20,0,3000,{.forwards=true},false);
+    chassis.moveToPose(-11,18,0,3000,{.forwards=true},false);
     
     
     // chassis.turnToHeading(-90,750,{},false);

@@ -78,6 +78,7 @@ void autonomous() {
     //         // delay to save resources
     //         pros::delay(10);
     //     }
+	cSensor.set_led_pwm(100);
 	Autonomous::matchLeftAuton2();
 	//Autonomous::matchSolo();
 	//Autonomous::test();
