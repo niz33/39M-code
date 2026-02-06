@@ -22,7 +22,6 @@ extern pros::MotorGroup rightWheels;
 //intake
 extern pros::Motor intakeMotor;
 extern pros::Motor rampMotor;
-extern pros::Motor midMotor;
 
 extern pros::Optical cSensor;
 

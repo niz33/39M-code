@@ -75,39 +75,26 @@ void Control::intake(){
     cRight.push(temp);
 
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-        midMotor.move_voltage(10000);
-        intakeMotor.move_voltage(10000);
         rampMotor.move_voltage(12000);
+        intakeMotor.move_voltage(12000);
         
 
     } else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-        // if(cRight.size()>=cDelay&&cRight.front()==0){
-        // //if (cSensor.get_hue()<35){
-        //     countdown=10;
-        // }
-        // if(countdown>0) countdown--;
-        // if(countdown>0){
-        //     midMotor.move_voltage(10000);
-        //     intakeMotor.move_voltage(2000);
-        // }
-        // else{
-            midMotor.move_voltage(-10000);
-            intakeMotor.move_voltage(10000);
-        //}
-        
+
         rampMotor.move_voltage(12000);
+        intakeMotor.move_voltage(12000);
     } else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
         intakeMotor.move_voltage(-10000);
         rampMotor.move_voltage(-12000);
-        midMotor.move_voltage(0);
+
     } else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
         intakeMotor.move_voltage(-3000);
         rampMotor.move_voltage(12000);
-        midMotor.move_voltage(-3000);
+
     } else {
         intakeMotor.move_voltage(0);
         rampMotor.move_voltage(0);
-        midMotor.move_voltage(0);
+  
     }
 
     if(cRight.size()>=cDelay){

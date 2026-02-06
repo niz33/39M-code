@@ -18,9 +18,9 @@ pros::Motor rightWheel3(13,pros::v5::MotorGears::blue);
 pros::MotorGroup rightWheels({-6,7,13},pros::v5::MotorGears::blue); 
 
 //intake
-pros::Motor rampMotor(-1, pros::v5::MotorGears::blue);
-pros::Motor intakeMotor(2, pros::v5::MotorGears::rpm_200);
-pros::Motor midMotor(10, pros::v5::MotorGears::rpm_200);
+pros::Motor rampMotor(19, pros::v5::MotorGears::blue);
+pros::Motor intakeMotor(-20, pros::v5::MotorGears::rpm_200);
+pros::
 
 pros::Optical cSensor(9);
 
